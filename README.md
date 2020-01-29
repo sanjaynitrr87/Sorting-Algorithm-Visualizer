@@ -12,6 +12,10 @@ Algorithms covered so far:
 | Insertion Sort | insertion_sort |
 | Heap Sort | heap_sort |
 | Merge Sort | merge_sort |
+| PanCake Sort | pancake_sort |
+| Count Sort | counting_sort |
+| Bucket Sort | bucket_sort |
+| Recursice Insertion Sort | rec_insertion_sort |
 
 # Usage:
 
