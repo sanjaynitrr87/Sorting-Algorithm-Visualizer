@@ -212,3 +212,86 @@ def quick_sort(nums):  # n^2
             _quick_sort(items, split_index + 1, high)
 
     _quick_sort(nums, 0, nums.get_len() - 1)
+
+def counting_sort(nums):
+    s = 100 + 1 #taken the range as 100
+    count = [0]*s
+
+    for i in nums:
+        count[i] += 1
+
+    a = 0
+
+    for i in range(s):
+        for j in range(count[i]):
+            nums[a] = i
+            a += 1
+
+    return nums
+
+def pancake_sort(nums):
+
+    n = nums.get_len()
+
+    def flip(nums, k):
+        begin = 0
+        while begin < k:
+            tmp = nums[begin]
+            nums[begin] = nums[k]
+            nums[k] = tmp
+            begin += 1
+            k -= 1
+
+    def findmax(nums, size):
+        maj = 0
+        for i in range(0, size):
+            if nums[i] > nums[maj]:
+                maj = i
+        return maj
+
+    while n > 1:
+        me = findmax(nums, n)
+        if me != n-1:
+            flip(nums, me)
+            flip(nums, n-1)
+        n -= 1
+ 
+def bucket_sort(nums):
+    a = []
+    slots = 10 # 10 bucket slots
+
+    for i in range(slots):
+        a.append([])
+
+    for j in nums:
+        idx = int(slots * j)
+        a[idx].append(j)
+
+    for i in range(slots):
+        a[i] = insertion_sort(a[i]) #using already defined insertion sort here
+
+    k = 0
+    for i in range(slots):
+        for j in range(len(a[i])):
+            nums[k] = a[i][j]
+            k += 1
+
+    return nums
+
+def rec_insertion_sort(nums):
+    n = nums.get_len()
+
+    Insertion_Rec(nums, n) #recursive insertion function
+    def Insertion_Rec(nums, n):
+        if n <= 1:
+            return
+    
+        Insertion_Rec(nums, n-1)
+        last = nums[n-1]
+        i = n-2
+
+        while (i >= 0 and nums[i] > last):
+            nums[i+1] = nums[i]
+            i -= 1
+
+        nums[i+1] = last
